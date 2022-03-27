@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+    <script src="cam.js" async></script>
     <style>
         html, body {
             height: 100% ;
@@ -27,29 +27,27 @@
         }
         .left{
             grid-row-start: 2;
-            grid-row-end: 40;
+            grid-row-end: 5;
         }
         .main {
             grid-column-start: 2;
             grid-column-end: 5;
 
             grid-row-start: 2;
-            grid-row-end: 30;
+            grid-row-end: 3;
         }
         .cuttingLine {
             grid-column-start: 2;
             grid-column-end: 5;
 
-            grid-row-start: 31;
-            grid-row-end: 40;
+            grid-row-start: 4;
+            grid-row-end: 5;
         }
 
         .tools {
             grid-column-start: 2;
             grid-column-end: 5;
 
-            grid-row-start: 30;
-            grid-row-end: 31;
         }
     </style>
 </head>
@@ -58,9 +56,14 @@
     <div class="grid-container">
         <div class="head"><img style="height: 70px; padding-top: 20px;padding-left: 10px;" src="logo.svg"></div>
         <div class="left"></div>
-        <div class="main" ></div>
+        <div class="main" >
+            <div id="container">
+                <video autoplay="false" id="videoElement" width="500" height="500">
+                </video>
+            </div>
+        </div>
         <div class="tools">
-            <div style="text-align: center">📸 🖥️ 🔴</div>
+            <div style="text-align: center"><a id="camButton">📸</a> 🖥️ 🔴</div>
         </div>
         <div class="cuttingLine"></div>
       </div>
