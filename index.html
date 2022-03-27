@@ -1,47 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
+
     <style>
-        .container {
-            height: 400px;
-            position: relative;
-            border: 3px solid black;
-        }
-
-        .vertical-center {
+        html, body {
+            height: 100% ;
             margin: 0;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            -ms-transform: translate(-50%,-50%);
-            transform: translate(-50%, -50%);
         }
 
-        .button {
-            border: none;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 24px;
-            margin: 4px 2px;
-            cursor: pointer;
+        .grid-container {
+            height: 100% ;
+            display: grid;
+            grid-template-columns: auto auto auto;
+            gap: 1px;
+            background-color: #000000;
         }
 
+        .grid-container > div {
+            background-color: rgba(255, 255, 255, 1.0);
+            font-size: 30px;
+        }
 
-        .button {background-color: greenyellow;}
-        .button {background-color: #4cff00;}
+        .head {
+            grid-column-start: 1;
+            grid-column-end: 5;
+        }
+        .left{
+            grid-row-start: 2;
+            grid-row-end: 40;
+        }
+        .main {
+            grid-column-start: 2;
+            grid-column-end: 5;
+
+            grid-row-start: 2;
+            grid-row-end: 30;
+        }
+        .cuttingLine {
+            grid-column-start: 2;
+            grid-column-end: 5;
+
+            grid-row-start: 31;
+            grid-row-end: 40;
+        }
+
+        .tools {
+            grid-column-start: 2;
+            grid-column-end: 5;
+
+            grid-row-start: 30;
+            grid-row-end: 31;
+        }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="vertical-center">
-            <button class="button b1">Record</button>
-            <button class="button b2">Edit</button>
-            <button class="button b3">Manage</button>
+    <div class="grid-container">
+        <div class="head"><img style="height: 70px; padding-top: 20px;padding-left: 10px;" src="logo.svg"></div>
+        <div class="left"></div>
+        <div class="main" ></div>
+        <div class="tools">
+            <div style="text-align: center">📸 🖥️ 🔴</div>
         </div>
-    </div>
+        <div class="cuttingLine"></div>
+      </div>
 </body>
 
 </html>
