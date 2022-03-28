@@ -10,11 +10,13 @@ document.getElementById("camButton").addEventListener("click", function() {
 if (navigator.mediaDevices.getUserMedia) {       
     cam= !cam
     if(cam){
+        document.getElementById("camButton").style.backgroundColor = "green";
     navigator.mediaDevices.getUserMedia({video: true})
     .then(function(stream) {video.srcObject = stream;})
     .catch(function(err0r) {console.log("Something went wrong!");});
     }else{
         video.srcObject = null;
+        document.getElementById("camButton").style.backgroundColor = null;
     }
 }
 });

@@ -9,9 +9,10 @@
         }
 
         .grid-container {
+            grid-template-rows: 100px calc(80% - 150px) 50px auto;
+            grid-template-columns: 300px auto ;
             height: 100% ;
             display: grid;
-            grid-template-columns: auto auto auto;
             gap: 1px;
             background-color: #000000;
         }
@@ -23,7 +24,7 @@
 
         .head {
             grid-column-start: 1;
-            grid-column-end: 5;
+            grid-column-end: 3;
         }
         .left{
             grid-row-start: 2;
@@ -31,14 +32,14 @@
         }
         .main {
             grid-column-start: 2;
-            grid-column-end: 5;
+            grid-column-end: 3;
 
             grid-row-start: 2;
             grid-row-end: 3;
         }
         .cuttingLine {
             grid-column-start: 2;
-            grid-column-end: 5;
+            grid-column-end: 3;
 
             grid-row-start: 4;
             grid-row-end: 5;
@@ -46,7 +47,7 @@
 
         .tools {
             grid-column-start: 2;
-            grid-column-end: 5;
+            grid-column-end: 3;
 
         }
     </style>
@@ -58,12 +59,16 @@
         <div class="left"></div>
         <div class="main" >
             <div id="container">
-                <video autoplay="false" id="videoElement" width="500" height="500">
+                <video autoplay="false" id="videoElement" height="100px">
                 </video>
             </div>
         </div>
         <div class="tools">
-            <div style="text-align: center"><a id="camButton">📸</a> 🖥️ 🔴</div>
+            <div style="text-align: center;
+                -moz-user-select: none;
+                -khtml-user-select: none;
+                user-select: none;
+            "><a id="camButton">📸</a> 🖥️ 🔴</div>
         </div>
         <div class="cuttingLine"></div>
       </div>
