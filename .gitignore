@@ -1,0 +1,7 @@
+
+*.sqlite
+*.config
+.vs/vdo_editor/v17/.suo
+*.testlog
+*.manifest
+*.json
