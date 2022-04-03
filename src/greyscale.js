@@ -42,5 +42,6 @@ var processor = {
     }
 };
 
-processor.doLoad()
-
+document.addEventListener("DOMContentLoaded", () => {
+    processor.doLoad()
+});
