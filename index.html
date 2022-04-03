@@ -1,30 +1,51 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CamCut</title>
     <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
     <script src="cam.js" async></script>
+    <script src="screenRecorder.js" async></script>
+  </head>
 
-</head>
-
-<body>
+  <body>
+    <video width="700" height="400" controls></video>
     <div class="grid-container">
-        <div class="head"><img style="height: 70px; padding-top: 20px;padding-left: 10px;" src="logo.svg"></div>
-        <div class="left"></div>
-        <div class="main" >
-            <div id="container">
-                <video autoplay="false" id="videoElement" height="100px">
-                </video>
-            </div>
-        </div>
-        <div class="tools">
-            <div style="text-align: center;
-                -moz-user-select: none;
-                -khtml-user-select: none;
-                user-select: none;
-            "><a id="camButton">📸</a> 🖥️ 🔴</div>
-        </div>
-        <div class="cuttingLine"></div>
+      <div class="head">
+        <img
+          style="height: 70px; padding-top: 20px; padding-left: 10px"
+          src="logo.svg"
+          href="index.html"
+        />
       </div>
-</body>
-
+      <div class="left"></div>
+      <div class="main">
+        <div id="container">
+          <video autoplay="false" id="videoElement" height="100px"></video>
+        </div>
+      </div>
+      <button class="btn" onclick="start()">
+        <i class="fa fa-home"></i> screen
+      </button>
+      <div class="tools">
+        <div
+          style="
+            text-align: center;
+            -moz-user-select: none;
+            -khtml-user-select: none;
+            user-select: none;
+          "
+        >
+          <button class="btn" onclick="start()">
+            <i class="fa fa-home"></i>Camera
+          </button>
+          <button class="button button1">RECORD</button>
+          <button class="button button2">EDIT</button>
+        </div>
+      </div>
+      <div class="cuttingLine"></div>
+    </div>
+  </body>
 </html>
