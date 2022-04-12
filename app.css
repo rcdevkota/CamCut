@@ -4,14 +4,15 @@
 }
 
 :root {
-  --primary-color: #000106;
-  --secondary-color: #fff;
+
+  --primary-color: rgb(130, 188, 191);
+  --secondary-color: #212121;
+  
 }
 .dark-theme {
+--primary-color: #000106;
+--secondary-color: #fff;
 
-
-  --primary-color: #94a197;
-  --secondary-color: #212121;
 }
 body {
 
