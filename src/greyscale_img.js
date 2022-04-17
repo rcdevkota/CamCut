@@ -1,13 +1,12 @@
 var ctx = c.getContext("2d"), img = new Image;
 img.onload = setup;  img.crossOrigin = "";
-img.src = "//i.imgur.com/OrYVGI8.jpg";
+img.src = "http://i.imgur.com/OrYVGI8.jpg";
 
 function setup() {
   c.width = this.naturalWidth;  c.height = this.naturalHeight;
   ctx.drawImage(this, 0, 0);    btn.disabled = false
 }
 
-// Main code for demo
 btn.onclick = function() {
   
   var idataSrc = ctx.getImageData(0, 0, c.width, c.height), // original
@@ -28,7 +27,7 @@ btn.onclick = function() {
   
   // put back luma data so we can save it as image
   ctx.putImageData(idataTrg, 0, 0);
-  demo.src = c.toDataURL();                                 // set demo result's src url
+  demo.src = c.toDataURL();
   
   // restore backup data
   ctx.putImageData(idataSrc, 0, 0);
