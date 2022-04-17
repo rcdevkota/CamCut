@@ -2,6 +2,7 @@ CamCut
 Team Members
 Ram Chandra Devkota
 Peerole Ahlers
+Jendrik Heitmann
 
 Following are the documentation and literatures used for the develpement of the project:
 
