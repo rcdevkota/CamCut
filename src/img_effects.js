@@ -8,7 +8,7 @@ function setup() {
   btn.disabled = false;
   btn2.disabled = false
 }
-
+// greyscaling effect
 btn.onclick = function() {
 
   var idataSrc = ctx.getImageData(0, 0, canvas.width, canvas.height), // original
@@ -35,6 +35,7 @@ btn.onclick = function() {
   ctx.putImageData(idataSrc, 0, 0);
 };
 
+// sepia effect
 btn2.onclick = function() {
 
   let idataSrc = ctx.getImageData(0, 0, canvas.width, canvas.height), // original
