@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            body {
+                background: black;
+                color: #CCCCCC;
+            }
+
+            div {
+                float: left;
+                border: 1px solid #444444;
+                padding: 10px;
+                margin: 10px;
+                background: #3B3B3B;
+            }
+            checkbox {
+                float: left;
+                padding: 3px;
+            }
+        </style>
+    </head>
+
+    <body >
+        <div>
+            <video id="sample_video" controls="true" width="480" height="270" crossorigin="anonymous">
+                <source src="resources/sample_video.mp4" type="video/mp4">
+            </video>
+        </div>
+        <checkbox>
+            <input type="checkbox" id="grey_check" name="grey_check">
+            <label for="grey_check">Greyscale</label>
+        </checkbox><br>
+        <checkbox>
+            <input type="checkbox" id="sepia_check" name="sepia_check">
+            <label for="sepia_check">Sepia</label>
+        </checkbox>
+        <canvas id="c1" width="480" height="270"></canvas>
+        <script type="text/javascript" src="src/greyscale.js"></script>
+        <!--
+        <button disabled id=btn>SAVE TO GREY</button><br>
+        <button disabled id=btn2>SAVE TO SEPIA</button><br>
+        <canvas id=canvas></canvas><br><img id=sample>
+        <script type="text/javascript" src="src/img_effects.js"></script>
+        -->
+    </body>
+</html>

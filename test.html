@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CamCut</title>
+    <link rel="stylesheet" type="text/css" href="app.css" media="screen" />
+    <script src="/src/cam.js" async></script>
+    <script src="/src/cam.js" async></script>
+    <script src="/src/main.js"></script>
+  </head>
+
+  <body>
+    <div class="head">
+      <nav>
+        <img src="resources/logo.svg" class="logo" />
+        <ul>
+          <li><a href="">Record New</a></li>
+          <li><a href="">Recorded Items</a></li>
+          <li><a href="">Edit</a></li>
+        </ul>
+        <img src="resources/moon.png" id="darkIcon" />
+      </nav>
+      <button class="button1" id="btnStart">Start</button>
+      <button class="button1" id="btnPause">Pause</button>
+      <button class="button1" id="btnStop">Stop</button>
+      //here starts the part for recording and saving the video
+
+      <video controls></video>
+      <video id="vid2"></video>
+
+      //javascript for recording and saving the video to the server
+
+      <script>
+        let constrainObj = {
+          audio: true,
+          video: {
+            width: { min: 640, ideal: 1280, max: 1920 },
+            height: { min: 480, ideal: 720, max: 1080 },
+          },
+        };
+
+        //here starts the code for recording the video and saving it
+        //media caputre and media recorder api
+        //
+        navigator.mediaDevices
+          .getUserMedia(constrainObj)
+          .then(function (mediaStreamObj) {
+            //connect the media stream to the first video element
+
+            let video = document.querySelector("video");
+            if ("srcObject" in video) {
+              video.srcObject = mediaStreamObj;
+            } else {
+              video.src = window.URL.createObjectURL(mediaStreamObj);
+            }
+            video.onloadedmetadata = function (ev) {
+              video.play;
+            };
+            let start = document.getElementById("btnStart");
+            let pause = document.getElementById("btnPause");
+            let stop = document.getElementById("btnStop");
+            let vidSave = document.getElementById("vid2");
+            let mediaRecorder = new MediaRecorder(mediaStreamObj);
+            let chunks = [];
+            start.addEventListener("click", (ev) => {
+              mediaRecorder.start();
+              console.log(mediaRecorder.state);
+            });
+            stop.addEventListener("click", (ev) => {
+              mediaRecorder.stop();
+              console.log(mediaRecorder.state);
+            });
+            mediaRecorder.ondataavailable = function (ev) {
+              chunks.push(ev.data);
+            };
+
+            mediaRecorder.onstop = (ev) => {
+              let blob = new Blob(chunks, { type: "video/mp4;" });
+              //clears out the chunks of array so that next time we record the array is empty and clearing out to save memory
+              chunks = [];
+              let videoUrl = window.URL.createObjectURL(blob);
+              vidSave.src = videoUrl;
+            };
+          })
+          .catch(function (err) {
+            console.log(err.name, err.message);
+          });
+      </script>
+    </div>
+    <div id="container">
+      <video autoplay="false" id="videoElement" height="100px"></video>
+    </div>
+    <div></div>
+  </body>
+
+  <script>
+    var darkIcon = document.getElementById("darkIcon");
+
+    darkIcon.onclick = function () {
+      document.body.classList.toggle("dark-theme");
+      if (document.body.classList.contains("dark-theme")) {
+        darkIcon.src = "resources/sun.png";
+      } else {
+        darkIcon.src = "resources/moon.png";
+      }
+    };
+  </script>
+</html>
