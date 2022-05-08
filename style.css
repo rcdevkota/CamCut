@@ -1,0 +1,141 @@
+:root{
+  --prim-color: #d1d0d0;
+  --onTop-color: #dedede78;
+  --shade-color: #929292;
+  --backbounce-color:#ffffffcc;
+}
+
+.dark_mode{
+  --prim-color: #1d1d1d;
+  --onTop-color: #6c6c6c3b;
+  --shade-color: #141414;
+  --backbounce-color:#ffffff29;
+}
+
+html,
+body {
+  margin: 0;
+  height: 100vh;
+  background-color: var(--prim-color);
+}
+
+header{
+  height: 80px;
+  padding: 10px;
+}
+
+.headerContent{
+  width: calc(100% - 20px);
+  height: calc(100% - 20px);
+  padding: 10px;
+  border-radius: 40px;
+  background-color: var(--onTop-color);
+  box-shadow: 5px 5px 5px var(--shade-color),
+              -2px -2px 4px var(--backbounce-color);
+}
+
+#logo{
+  height: 100%; 
+  filter: drop-shadow(3px 3px 3px var(--shade-color));
+}
+#main{
+  height: calc(100% - 120px);
+  padding: 10px;
+  padding-right: 40px;
+  padding-left: 40px;
+}
+.mainContent{
+  width: calc(100% - 20px);
+  height: calc(100% - 40px);
+  padding: 10px;
+  border-radius: 40px;
+  background-color: var(--onTop-color);
+  box-shadow: 5px 5px 5px var(--shade-color),
+              -2px -2px 4px var(--backbounce-color);
+}
+
+
+.monitor{
+  padding: 40px;
+  padding-left: 5%;
+  border-radius: 40px;
+  padding-bottom: 20px;
+  height: calc(100% - 135px);
+}
+
+.video{
+  width: 49%;
+  height: 100%;
+  box-shadow: 5px 5px 5px var(--shade-color),
+              -2px -2px 4px var(--backbounce-color);
+
+}
+
+.footer{
+  height: 40px;
+  padding-left: calc(50% - 170px);
+  
+}
+.footerContent{
+  width: 340px;
+  height:50px;
+  border-radius: 50px;
+  text-align: center;
+  padding: 10px;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--onTop-color);
+  box-shadow: 5px 5px 5px var(--shade-color),
+              -2px -2px 4px var(--backbounce-color);
+}
+
+.button{
+  text-align: center;
+  -ms-user-select: None;
+  -moz-user-select: None;
+  -webkit-user-select: None;
+  user-select: None;
+  font-size: 33px;
+  border-radius: 40px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--onTop-color);
+  box-shadow: 5px 5px 5px var(--shade-color),
+              -2px -2px 4px var(--backbounce-color);
+}
+
+input{
+  display: none;
+}
+
+
+
+input:checked + label {
+  transition: 100ms;
+  box-shadow: 
+      5px 5px 5px #035602 inset,
+      -2px -2px 4px #03c000 inset,
+      0px 0px 5px #03c000;
+  color: white;
+  background-color: green;
+}
+
+#darkbutton {
+  float: right;
+  margin: 3px;
+  font-size: 44px;
+  color: #565656;
+
+  text-shadow: 2px 2px 2px var(--shade-color),
+  -1px -1px 1px var(--backbounce-color);
+}
+
+#checkboxDark:checked + label {
+  transition: 100ms;
+  box-shadow: 
+      5px 5px 5px rgb(42 42 42) inset,
+      -2px -2px 4px rgb(68 68 68)  inset,
+      0px 0px 5px rgb(59 59 59);
+  color: rgb(170 170 170);
+  background-color: rgb(56 56 56);
+}
