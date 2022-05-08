@@ -8,6 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
 	<script type="text/javascript" src="/backend/recorder.js" defer></script>
 	<script type="text/javascript" src="/backend/main.js" defer></script>
+	<script type="text/javascript" src="/backend/liveView.js" defer></script>
   </head>
 
 	<body>
@@ -21,10 +22,14 @@
 			</div>
 		</header>
 		<div id="main">
-			<div class="mainContent">
+			<div class="mainContent" id="container">
+				
 				<div class="monitor">
-					<video class="video" controls></video>
-					<video class="video" controls></video>
+					<video autoplay="false" id="videoElement" width="500" height="500">
+                </video>
+					<video autoplay="false" id="videoElement" width="500" height="500">
+                </video>
+					
 				</div>
 				<div class="footer">
 					<div class="footerContent">
