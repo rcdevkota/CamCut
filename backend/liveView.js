@@ -1,58 +1,41 @@
 const checkboxCam = document.getElementById("checkbox📸");
-var video = document.querySelector("#videoElement");
-
-var cam = false;
+const checkboxScreen = document.getElementById("checkbox🖥");
+const  videoElemWebCam = document.getElementById(" videoElemWebCam");
+const videoElemScreen = document.getElementById("videoElementScreen");
+//json parameters for the recording of the screen 
+  var displayMediaOptions = {
+      video: {
+        cursor: "always",
+      },
+      audio: false,
+    };
 
 checkboxCam.addEventListener("click", () => {
 if (document.getElementById("checkbox📸").checked) {
         console.log(" gecheckt");
-        const element = document.getElementById("camButton");
-
-
-    if (navigator.mediaDevices.getUserMedia) {       
-    cam= !cam
-    if(cam){
-    navigator.mediaDevices.getUserMedia({video: true})
-    .then(function(stream) {video.srcObject = stream;})
-    .catch(function(err0r) {console.log("Something went wrong!");});
-    }else{
-        video.srcObject = null;
+    showWebcam();
     }
+});
+checkboxScreen.addEventListener("click", () => {
+if (document.getElementById("checkbox📸").checked) {
+        console.log(" gecheckt");
+    showScreen();
     }
-}});
+});
 
-    
-
-
-
-
-//Put event listeners into place
-window.addEventListener("DOMContentLoaded", function() {
-    // Grab elements, create settings, etc.
-    var canvas = document.getElementById("canvas"),
-        context = canvas.getContext("2d"),
-        video = document.getElementById("video"),
-        videoObj = { "video": true },
-        errBack = function(error) {
-            console.log("Video capture error: ", error.code); 
-        };
-
-    // Put video listeners into place
-    if(navigator.getUserMedia) { // Standard
-        navigator.getUserMedia(videoObj, function(stream) {
-            video.src = stream;
-            video.play();
-        }, errBack);
-    } else if(navigator.webkitGetUserMedia) { // WebKit-prefixed
-        navigator.webkitGetUserMedia(videoObj, function(stream){
-            video.src = window.webkitURL.createObjectURL(stream);
-            video.play();
-        }, errBack);
+ async function showWebcam() {
+      try {
+        videoElemWebCam.srcObject = await navigator.mediaDevices.getUserMedia(displayMediaOptions);
+      } catch (err) {
+        console.error("Error: " + err);
+      }
+ }
+     async function showScreen() {
+      try {
+        videoElemScreen.srcObject = await navigator.mediaDevices.getDisplayMedia(
+          displayMediaOptions
+        );
+      } catch (err) {
+        console.error("Error: " + err);
+      }
     }
-    else if(navigator.mozGetUserMedia) { // Firefox-prefixed
-        navigator.mozGetUserMedia(videoObj, function(stream){
-            video.src = window.URL.createObjectURL(stream);
-            video.play();
-        }, errBack);
-    }
-}, false);
