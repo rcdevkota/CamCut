@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>CamCut</title>
+		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="cut.css" media="screen" />
+		<script type="text/javascript" src="/backend/cut.js" defer></script>
+		<script type="text/javascript" src="/backend/main.js" defer></script>
+	</head>
+
+	<body onload="main()">
+		<header>
+			<div class="headerContent">
+				<img id="logo" style="float: left;" src="resources/logo.svg">
+				<div style="float: left; " >🎥✂️</div>
+				<input type="checkbox" class="checkbox" id="checkboxDark">
+				<label for="checkboxDark" class="button" id="darkbutton">
+					◉
+				</label>
+			</div>
+		</header>
+
+		<div id="main" >
+
+			<div class="mainContent" id="container">
+				<div id="leftContent"  >
+					<div class="scroll" id="privius">
+
+					</div>
+				</div>
+				<div class="monitor">
+					<canvas id="video"></canvas>
+					<div class="footer">
+						<div class="footerContent">
+							<input type="checkbox" class="checkbox" id="checkbox⏯" >
+								<label for="checkbox⏯" class="button">
+									⏯
+								</label>
+								<input id="slider" type="range" min="0" max="1000" value="0" class="slider" >
+							<input type="checkbox" class="checkbox" id="checkbox🔴">
+								<label for="checkbox🔴" class="button">
+									🔴
+								</label>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
