@@ -69,7 +69,6 @@ header{
   height: 100%;
   box-shadow: 5px 5px 5px var(--shade-color),
               -2px -2px 4px var(--backbounce-color);
-
 }
 
 .footer{
@@ -124,7 +123,7 @@ input:checked + label {
 #darkbutton {
   float: right;
   margin: 3px;
-  font-size: 44px;
+  font-size: 38px;
   color: #565656;
 
   text-shadow: 2px 2px 2px var(--shade-color),
@@ -139,4 +138,21 @@ input:checked + label {
       0px 0px 5px rgb(59 59 59);
   color: rgb(170 170 170);
   background-color: rgb(56 56 56);
+}
+
+
+#camCutSwop{
+  margin: 3px;
+  margin-left: 10px;
+  font-size: 33px;
+  float: right;
+  user-select: None;
+  text-align: center;
+  border-radius: 40px;
+  width: 50px;
+  height: 50px;
+  text-decoration:none;  
+  background-color: var(--onTop-color);
+  box-shadow: 5px 5px 5px var(--shade-color),
+              -2px -2px 4px var(--backbounce-color);
 }
