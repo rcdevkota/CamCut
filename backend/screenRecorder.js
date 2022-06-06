@@ -4,22 +4,23 @@ var mediaRecorder;
 var today = new Date();
 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-const dateTime = date + '_' + time;
-var dateTimeName =   "webcam_"+dateTime.toString();
-console.log(dateTimeName);
+console.log(date);
+console.log(time);
 
+const dateTime = date + ',' + time;
+var dateTimeName = dateTime.toString() + "Screen.mp4";
+
+console.log(dateTimeName);
 
 //saves the blob streams into this array
 let chunks = [];
-const checkboxRec = document.getElementById("checkbox🎙");
-checkboxRec.addEventListener("click", () => {
-	if (document.getElementById("checkbox🎙").checked) {
-		console.log("webcam recording started");
-		var audioStatus = document.getElementById("checkbox🔊").checked;
-			console.log(audioStatus);
+
+const checkboxScr = document.getElementById("checkbox🔴");
+checkboxScr.addEventListener("click", () => {
+	if (document.getElementById("checkbox🔴").checked) {
+		console.log("webcam recording on");
 		constrainObj = {
-			
-			audio: audioStatus,
+			audio: document.getElementById("checkbox🎙").checked,
 			video: {
 				width: { min: 640, ideal: 1280, max: 1920 },
 				height: { min: 480, ideal: 720, max: 1080 },
@@ -29,7 +30,6 @@ checkboxRec.addEventListener("click", () => {
 		navigator.mediaDevices.getUserMedia(constrainObj).then(function(mediaStreamObj) {
 			//connect the media stream to the first video element
 			mediaRecorder = new MediaRecorder(mediaStreamObj);
-
 			mediaRecorder.start();
 			mediaRecorder.ondataavailable = function(ev) {
 				chunks.push(ev.data);
@@ -45,10 +45,12 @@ checkboxRec.addEventListener("click", () => {
 		});
 	} else {
 		mediaRecorder.stop();
-		console.log("webcam recording stopped");
+		console.log("screen recording stopped");
 
 	}
 })
+
+
 function uploadVideo() {
 	//for downloading the video to the local repository
 	const blob = new Blob(chunks, { type: 'video/webm' });
