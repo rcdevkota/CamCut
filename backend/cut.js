@@ -1,6 +1,7 @@
 var videos= new Array();
 
 function lodeVideo(name) {
+console.log(name)
 	video = document.createElement('video');
 	video.src=name;
 	video.load();
@@ -8,30 +9,35 @@ function lodeVideo(name) {
 }
 
 function main(){
+	
+	/*
 	video= lodeVideo("resources/movie2.mp4");
 	addvideo(video);
 	video2= lodeVideo("resources/60fps_video.mp4");
 	addvideo(video2);
-	showVideos();
-	
-	audioRec()
-	
+	*/
 	videoCanvas=document.getElementById('video');
 	video.addEventListener('loadeddata', (event) => {
 		const context = videoCanvas.getContext("2d");
+		/*
 		context.canvas.width  = video.videoWidth;
 		context.canvas.height = video.videoHeight;
+		*/
 	});
 }
 
 function addvideo(video){
+	const context = videoCanvas.getContext("2d");
+	context.canvas.width  = video.srcElement.videoWidth;
+	context.canvas.height  = video.srcElement.videoHeight;
 	videodata = {
-		video: video,
+		video: video.srcElement,
 		von: 0,
 		bis: 1,
 		topvideo: null
 	}
 	videos.push(videodata)
+	showVideos();
 }
 
 function showVideos(){
@@ -192,8 +198,6 @@ function play(){
 	window.requestAnimationFrame(play);
 }
 
-
-
 function setSlider(curent){
 	document.getElementById('slider').value=(curent+zeitBis())/totelLength()*1000;
 }
@@ -269,8 +273,6 @@ function rec(){
 }
 
 function stopRecording() {
-	
-
     recorder.stop();
 	document.getElementById("checkbox⏯").disabled=false;
 	document.getElementById("checkbox🔴").checked=false;
@@ -316,25 +318,31 @@ document.getElementById("add").addEventListener("click",()=>{
 
 document.getElementById("clos").addEventListener("click",()=>{
 	document.getElementById("popupHold").style.display = "none";
-	showAddVideos()
 })
 
+
+
 function showAddVideos(){
+	
+	vidoelodlist=getVideo();
+lode=document.getElementById("lodeScrol");
+		lode.innerHTML = "";
+	for(videonummer=0;videonummer<vidoelodlist.length;videonummer++){
+		
+		lodevidoinhalt= addHtml(lode,"videolode","video")
+		lodeVideos=(lodeVideo(vidoelodlist[videonummer]));
+		lodevidoinhalt.src=lodeVideos.src;
+		
+		lodevidoinhalt.addEventListener("click",function(event) { addvideo(event)})
+	}
 
-	console.log(videos[0].video.audioTracks)
-	/*
-	const path = require("files/60fps_video.mp4");
 
 
-
-	const reader = new FileReader();
-	reader.onload = function(evt) {
-	  console.log(evt.target.result);
-	};
-	reader.readAsText("files/60fps_video.mp4");
-	*/
+	
 }
-
+function getVideo(){
+	return ["files/6da61167-6668-43e7-bb6b-50f7e4a16a9d.webm","files/60fps_video.mp4"]
+}
 //--------effecte
 document.getElementById("grayscale").addEventListener("click",()=>{
 	if(document.getElementById("grayscale").checked){
@@ -347,13 +355,20 @@ document.getElementById("grayscale").addEventListener("click",()=>{
 })
 
 document.getElementById("sepia").addEventListener("click",()=>{
-
-
 	if(document.getElementById("sepia").checked){
 		document.getElementById("video").style.filter = "sepia(100%)";
 		document.getElementById("grayscale").checked=false;
 	}else{
 		document.getElementById("video").style.filter = "";
 	}
+})
 
+//------------export
+
+function openExp(){
+		document.getElementById("popupHoldexp").style.display = "block";
+}
+
+document.getElementById("closexp").addEventListener("click",()=>{
+	document.getElementById("popupHoldexp").style.display = "none";
 })
