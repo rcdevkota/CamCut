@@ -8,8 +8,12 @@
 	margin: 10px;
 }
 
+#options{
+	flex-direction: row;
+	display: flex;
+  }
 .monitor{
-	width: calc(70% - 40px) ;
+	width: calc(100% - 246px) ;
 	height: calc(100% - 60px);
 	padding: 20px;
 	border-radius: 40px;
@@ -50,11 +54,12 @@
 }
 
 #video{
-	height: calc(100% - 70px);
-
+	max-height: calc(100% - 70px);
+	max-width: 100%;
 }
 
 #upDown{
+	user-select: None;
 	font-size: 27px;
 }
 
@@ -103,6 +108,50 @@
   ::-webkit-scrollbar-thumb:hover {
 	background: #767676; 
   }
+
+#add{
+	user-select: None;
+	width: 30px;
+	height: 30px;
+	font-size: 20px;
+	border-radius: 40px;
+	background-color: var(--onTop-color);
+	box-shadow: 5px 5px 5px var(--shade-color), -2px -2px 4px var(--backbounce-color);
+	margin: 2px;
+}
+
+#efect{
+	user-select: None;
+	width: 95px;
+	font-size: 20px;
+	border-radius: 40px;
+	padding: 2px;
+	margin: 2px;
+	height: 30px;
+}
+
+#lode{
+	margin-top: 10px;
+	margin-left: 25%;
+	width: 50%;
+	height: 50%;
+	border-radius: 40px;
+	background-color: var(--prim-color);
+	box-shadow: 5px 5px 5px var(--shade-color), -2px -2px 4px var(--backbounce-color);
+	padding: 20px;
+}
+
+#clos{
+	user-select: None;
+	width: 50px;
+	height: 50px;
+	font-size: 20px;
+	border-radius: 40px;
+	background-color: var(--onTop-color);
+	box-shadow: 5px 5px 5px var(--shade-color), -2px -2px 4px var(--backbounce-color);
+	float: right;
+	font-size: 33px;
+}
 /*
 
   #schnitbalken{

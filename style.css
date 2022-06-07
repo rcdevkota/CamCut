@@ -39,6 +39,7 @@ header{
   height: 100%; 
   filter: drop-shadow(3px 3px 3px var(--shade-color));
 }
+
 #main{
   height: calc(100% - 120px);
   padding: 10px;
@@ -54,7 +55,6 @@ header{
   box-shadow: 5px 5px 5px var(--shade-color),
               -2px -2px 4px var(--backbounce-color);
 }
-
 
 .monitor{
   padding: 40px;
@@ -155,4 +155,19 @@ input:checked + label {
   background-color: var(--onTop-color);
   box-shadow: 5px 5px 5px var(--shade-color),
               -2px -2px 4px var(--backbounce-color);
+}
+
+
+/*---popup--*/
+
+#popupHold{
+  background:rgba(0,0,0,.4);
+  cursor:pointer;
+  display:none;
+  height:100%;
+  position:fixed;
+  text-align:center;
+  top:0;
+  width:100%;
+  z-index:10000;
 }

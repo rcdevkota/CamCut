@@ -8,14 +8,14 @@ function lodeVideo(name) {
 }
 
 function main(){
-	video= lodeVideo("resources/YouTube 60fps Tester.mp4");
+	video= lodeVideo("resources/movie2.mp4");
 	addvideo(video);
 	video2= lodeVideo("resources/60fps_video.mp4");
 	addvideo(video2);
 	showVideos();
 	
-
-
+	audioRec()
+	
 	videoCanvas=document.getElementById('video');
 	video.addEventListener('loadeddata', (event) => {
 		const context = videoCanvas.getContext("2d");
@@ -177,7 +177,8 @@ function play(){
 		videos[videosPos].video.pause();
 		startnext();
 		return;
-	}else if(!document.getElementById('checkbox⏯').checked){
+	}else if(!document.getElementById('checkbox⏯').checked&&!document.getElementById('checkbox🔴').checked){
+
 		videos[videosPos].video.pause();
 		return;
 	}
@@ -185,8 +186,13 @@ function play(){
 	videoCanvas.width=videoCanvas.width;
 	var context = videoCanvas.getContext("2d");
 	context.drawImage(videos[videosPos].video, 0,0);
+
+	
+	
 	window.requestAnimationFrame(play);
 }
+
+
 
 function setSlider(curent){
 	document.getElementById('slider').value=(curent+zeitBis())/totelLength()*1000;
@@ -219,9 +225,135 @@ document.getElementById('slider').addEventListener("input",()=>{
 	showFrame();
 })
 
-function showFrame(){	
+function showFrame(){
 	var context = videoCanvas.getContext("2d");
-	videoCanvas.width=videoCanvas.width;
+	//videoCanvas.width=videoCanvas.width;
 	context.drawImage(videos[videosPos].video, 0,0)
+}
+
+
+//----------------------------------------------------------------------------
+
+document.getElementById("checkbox🔴").addEventListener("click",()=>{
+	if(document.getElementById("checkbox🔴").checked){
+		reset();
+		videos[videosPos].video.play();
+		window.requestAnimationFrame(play);
+		document.getElementById("checkbox⏯").checked=false;
+		document.getElementById("checkbox⏯").disabled=true;
+		rec();
+	}else{
+		stopRecording();
+	}
+
+})
+
+chunks= new Array();
+
+function audioRec(){
+
+/*
+	const mediaRecorder = new MediaRecorder(videos[0].video);
+    mediaRecorder.start();*/
+}
+
+function rec(){
+	var context = videoCanvas.getContext("2d");
+	recorder = new MediaRecorder(context.canvas.captureStream(totelLength()*1000));
+	recorder.ondataavailable = saveChunks;
+	recorder.onstop = exportVideo;
+	recorder.start();
+	setTimeout(function() {
+		stopRecording();
+	}, totelLength()*1000);
+}
+
+function stopRecording() {
+	
+
+    recorder.stop();
+	document.getElementById("checkbox⏯").disabled=false;
+	document.getElementById("checkbox🔴").checked=false;
+}
+
+function saveChunks(evt) {
+	if (evt.data.size > 0) {
+	  chunks.push(evt.data);
+	  uploadVideo()
+	}
+}
+
+function exportVideo() {
+	//vid.src = URL.createObjectURL(new Blob(chunks));
+}
+//---------------------------------------------------
+
+
+function uploadVideo() {
+	const blob = new Blob(chunks, { type: 'video/mp4' });
+	const url = window.URL.createObjectURL(blob);
+	const a = document.createElement('a');
+	a.style.display = 'none';
+	a.href = url;
+	a.download = "dateTimeName.mp4";
+	document.body.appendChild(a);
+	a.click();
+	setTimeout(() => {
+		document.body.removeChild(a);
+		window.URL.revokeObjectURL(url);
+	}, 100);
+	
+	
 	
 }
+
+//lode----------------
+
+document.getElementById("add").addEventListener("click",()=>{
+	document.getElementById("popupHold").style.display = "block";
+	showAddVideos()
+})
+
+document.getElementById("clos").addEventListener("click",()=>{
+	document.getElementById("popupHold").style.display = "none";
+	showAddVideos()
+})
+
+function showAddVideos(){
+
+	console.log(videos[0].video.audioTracks)
+	/*
+	const path = require("files/60fps_video.mp4");
+
+
+
+	const reader = new FileReader();
+	reader.onload = function(evt) {
+	  console.log(evt.target.result);
+	};
+	reader.readAsText("files/60fps_video.mp4");
+	*/
+}
+
+//--------effecte
+document.getElementById("grayscale").addEventListener("click",()=>{
+	if(document.getElementById("grayscale").checked){
+		document.getElementById("video").style.filter = "grayscale(100%)";
+		document.getElementById("sepia").checked=false;
+	}else{
+		document.getElementById("video").style.filter = "";
+	}
+	
+})
+
+document.getElementById("sepia").addEventListener("click",()=>{
+
+
+	if(document.getElementById("sepia").checked){
+		document.getElementById("video").style.filter = "sepia(100%)";
+		document.getElementById("grayscale").checked=false;
+	}else{
+		document.getElementById("video").style.filter = "";
+	}
+
+})

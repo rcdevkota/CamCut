@@ -12,6 +12,16 @@
 	</head>
 
 	<body onload="main()">
+		
+		<div id="popupHold">
+			<div id="lode">
+				<div id="clos"> 
+					❌	
+				</div>
+
+			</div>
+		</div>
+
 		<header>
 			<div class="headerContent">
 				<img id="logo" style="float: left;" src="resources/logo.svg">
@@ -24,9 +34,22 @@
 		</header>
 
 		<div id="main" >
-
 			<div class="mainContent" id="container">
-				<div id="leftContent"  >
+				<div id="leftContent">
+					<div id="options">
+
+						<input id="grayscale" type="checkbox" class="checkbox" >
+						<label for="grayscale" id="efect" class="button">
+							grayscale
+						</label>
+						<input id="sepia" type="checkbox" class="checkbox" >
+						<label for="sepia" id="efect" class="button">
+							sepia
+						</label>
+						<div id="add"> 
+							➕
+						</div>
+				</div>
 					<div class="scroll" id="privius">
 
 					</div>
