@@ -196,3 +196,17 @@ input:checked + label {
   user-select: none;
 }
 
+#closexp{
+	float: right;
+}
+
+#exp{
+	margin-top: 10px;
+	margin-left: calc(50% - 106px);
+	width: 212px;
+	height: 52px;
+	border-radius: 40px;
+	background-color: var(--prim-color);
+	box-shadow: 5px 5px 5px var(--shade-color), -2px -2px 4px var(--backbounce-color);
+	padding: 20px;
+}
