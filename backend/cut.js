@@ -249,7 +249,6 @@ document.getElementById("checkbox🔴").addEventListener("click",()=>{
 	}else{
 		stopRecording();
 	}
-
 })
 
 chunks= new Array();
@@ -263,12 +262,13 @@ function audioRec(){
 
 function rec(){
 	var context = videoCanvas.getContext("2d");
-	recorder = new MediaRecorder(context.canvas.captureStream(totelLength()*1000));
+	recorder = new MediaRecorder(context.canvas.captureStream(60));
 	recorder.ondataavailable = saveChunks;
 	recorder.onstop = exportVideo;
 	recorder.start();
 	setTimeout(function() {
 		stopRecording();
+		openExpForWeb();
 	}, totelLength()*1000);
 }
 
@@ -281,7 +281,6 @@ function stopRecording() {
 function saveChunks(evt) {
 	if (evt.data.size > 0) {
 	  chunks.push(evt.data);
-	  uploadVideo()
 	}
 }
 
@@ -290,24 +289,65 @@ function exportVideo() {
 }
 //---------------------------------------------------
 
+var mediaRecorder;
+
+//for naming the video
+var today = new Date();
+var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+var dateTime = date + '_' + time;
+var dateTimeNameWeb = dateTime.toString() +"cut";
 
 function uploadVideo() {
-	const blob = new Blob(chunks, { type: 'video/mp4' });
+	const blob = new Blob(chunks, { type: 'video/webm' });
+	chunks = [];
+	//for posting the video to the server
+	let videoFile = new File([blob], dateTimeNameWeb);
+
+	var formData = new FormData();
+	formData.append("file", videoFile);
+
+	fetch('upload', {
+		method: "POST",
+		body: formData
+	});
+}
+
+function downloadVideo() {
+	
+	//for downloading the video to the local repository
+	const blob = new Blob(chunks, { type: 'video/webm' });
+	chunks = [];
 	const url = window.URL.createObjectURL(blob);
 	const a = document.createElement('a');
 	a.style.display = 'none';
 	a.href = url;
-	a.download = "dateTimeName.mp4";
+	a.download = dateTimeNameWeb;
 	document.body.appendChild(a);
 	a.click();
+
 	setTimeout(() => {
 		document.body.removeChild(a);
 		window.URL.revokeObjectURL(url);
 	}, 100);
-	
-	
-	
+
 }
+
+async function openExpForWeb() {
+	document.getElementById("popupHoldexp").style.display = "block";
+}
+
+document.getElementById("uplode").addEventListener("click", () => {
+	uploadVideo();
+	document.getElementById("popupHoldexp").style.display = "none";
+})
+document.getElementById("donwlode").addEventListener("click", () => {
+	downloadVideo();
+	document.getElementById("popupHoldexp").style.display = "none";
+})
+document.getElementById("closexp").addEventListener("click", () => {
+	document.getElementById("popupHoldexp").style.display = "none";
+})
 
 //lode----------------
 
@@ -320,7 +360,9 @@ document.getElementById("clos").addEventListener("click",()=>{
 	document.getElementById("popupHold").style.display = "none";
 })
 
-
+function recaudio(){
+	captureStream()
+}
 
 function showAddVideos(){
 	
@@ -335,10 +377,6 @@ lode=document.getElementById("lodeScrol");
 		
 		lodevidoinhalt.addEventListener("click",function(event) { addvideo(event)})
 	}
-
-
-
-	
 }
 function getVideo(){
 	return ["files/6da61167-6668-43e7-bb6b-50f7e4a16a9d.webm","files/60fps_video.mp4"]

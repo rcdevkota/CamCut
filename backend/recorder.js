@@ -6,17 +6,59 @@ var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getD
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var dateTime = date + '_' + time;
 var dateTimeNameWeb = dateTime.toString() +"webcam";
-console.log(dateTimeNameWeb);
 
 
 //saves the blob streams into this array
 let chunks = [];
 const checkboxRec = document.getElementById("checkbox🔴");
 checkboxRec.addEventListener("click", () => {
-	if (document.getElementById("checkbox🔴").checked) {
+	if(document.getElementById("checkbox📸").checked){
+		cam();
+	}
+	if(document.getElementById("checkbox🖥").checked){
+		screen()
+	}
+})
+
+
+function screen(){
+	if (checkboxRec.checked) {
+		var audioStatus = document.getElementById("checkbox🔊").checked;
+		console.log("audioRecording status " + audioStatus);
+		constrainObj = {
+			video: {
+				mediaSource: "screen",
+			},
+			audio: true,
+		};
+
+		navigator.mediaDevices.getDisplayMedia(constrainObj).then(function(mediaStreamObj) {
+			//connect the media stream to the first video element
+			mdeiaRecorderScreen = new MediaRecorder(mediaStreamObj);
+			mdeiaRecorderScreen.start();
+			mdeiaRecorderScreen.ondataavailable = function(ev) {
+				chunksScreen.push(ev.data);
+			};
+			mdeiaRecorderScreen.onstop = (ev) => {
+				mdeiaRecorderScreen.stop();
+				mediaStreamObj.getTracks()
+					.forEach(track => track.stop())
+				openExpForScreen();
+			};
+		}).catch(function(err) {
+			console.log(err.name, err.message);
+		});
+	} else {
+		mdeiaRecorderScreen.stop();
+	}
+}
+
+
+
+function cam(){
+	if (checkboxRec.checked) {
 		console.log("webcam recording started");
 		var audioStatus = document.getElementById("checkbox🎙").checked;
-		console.log(audioStatus);
 		constrainObj = {
 
 			audio: audioStatus,
@@ -46,15 +88,15 @@ checkboxRec.addEventListener("click", () => {
 		});
 	} else {
 		mediaRecorder.stop();
-		console.log("webcam recording stopped");
-
 	}
-})
+}
+
+
+
 function uploadWebcamVideo() {
-
-
+	if(document.getElementById("checkbox📸").checked){
 	const blob = new Blob(chunks, { type: 'video/webm' });
-
+	chunks = [];
 	//for posting the video to the server
 	let videoFile = new File([blob], dateTimeNameWeb);
 
@@ -65,15 +107,14 @@ function uploadWebcamVideo() {
 		method: "POST",
 		body: formData
 	});
-	
-	alert('webcam recording successfully uploded to the Cloud');
-	
-
+}
 }
 
 function downloadWebcamVideo() {
+	if(document.getElementById("checkbox📸").checked){
 	//for downloading the video to the local repository
 	const blob = new Blob(chunks, { type: 'video/webm' });
+	chunks = [];
 	const url = window.URL.createObjectURL(blob);
 	const a = document.createElement('a');
 	a.style.display = 'none';
@@ -81,30 +122,28 @@ function downloadWebcamVideo() {
 	a.download = dateTimeNameWeb;
 	document.body.appendChild(a);
 	a.click();
+
+
 	setTimeout(() => {
 		document.body.removeChild(a);
 		window.URL.revokeObjectURL(url);
 	}, 100);
-
-	
+}
 }
 
 async function openExpForWeb() {
-	console.log("test");
 	document.getElementById("popupHoldexp").style.display = "block";
-	document.getElementById("uplode").addEventListener("click", () => {
-		uploadWebcamVideo();
-		document.getElementById("popupHoldexp").style.display = "none";
-	})
-	document.getElementById("donwlode").addEventListener("click", () => {
-		downloadWebcamVideo();
-		document.getElementById("popupHoldexp").style.display = "none";
-	})
-	console.log("tes2");
-	}
+}
 
-
+document.getElementById("uplode").addEventListener("click", () => {
+	uploadWebcamVideo();
+	document.getElementById("popupHoldexp").style.display = "none";
+})
+document.getElementById("donwlode").addEventListener("click", () => {
+	downloadWebcamVideo();
+	document.getElementById("popupHoldexp").style.display = "none";
+})
 document.getElementById("closexp").addEventListener("click", () => {
-		document.getElementById("popupHoldexp").style.display = "none";
-	})
+	document.getElementById("popupHoldexp").style.display = "none";
+})
 
