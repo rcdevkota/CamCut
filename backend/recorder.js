@@ -5,8 +5,8 @@ var today = new Date();
 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var dateTime = date + '_' + time;
-var dateTimeName = dateTime.toString() +"webcam.webm";
-console.log(dateTimeName);
+var dateTimeNameWeb = dateTime.toString() +"webcam";
+console.log(dateTimeNameWeb);
 
 
 //saves the blob streams into this array
@@ -38,7 +38,7 @@ checkboxRec.addEventListener("click", () => {
 				mediaRecorder.stop();
 				mediaStreamObj.getTracks()
 					.forEach(track => track.stop())
-				openExp();
+				openExpForWeb();
 				
 			};
 		}).catch(function(err) {
@@ -50,13 +50,13 @@ checkboxRec.addEventListener("click", () => {
 
 	}
 })
-function uploadVideo() {
+function uploadWebcamVideo() {
 
 
 	const blob = new Blob(chunks, { type: 'video/webm' });
 
 	//for posting the video to the server
-	let videoFile = new File([blob], dateTimeName);
+	let videoFile = new File([blob], dateTimeNameWeb);
 
 	var formData = new FormData();
 	formData.append("file", videoFile);
@@ -71,14 +71,14 @@ function uploadVideo() {
 
 }
 
-function downloadVideoLocal() {
+function downloadWebcamVideo() {
 	//for downloading the video to the local repository
 	const blob = new Blob(chunks, { type: 'video/webm' });
 	const url = window.URL.createObjectURL(blob);
 	const a = document.createElement('a');
 	a.style.display = 'none';
 	a.href = url;
-	a.download = dateTimeName;
+	a.download = dateTimeNameWeb;
 	document.body.appendChild(a);
 	a.click();
 	setTimeout(() => {
@@ -89,15 +89,15 @@ function downloadVideoLocal() {
 	
 }
 
-async function openExp() {
+async function openExpForWeb() {
 	console.log("test");
 	document.getElementById("popupHoldexp").style.display = "block";
 	document.getElementById("uplode").addEventListener("click", () => {
-		uploadVideo();
+		uploadWebcamVideo();
 		document.getElementById("popupHoldexp").style.display = "none";
 	})
 	document.getElementById("donwlode").addEventListener("click", () => {
-		downloadVideoLocal();
+		downloadWebcamVideo();
 		document.getElementById("popupHoldexp").style.display = "none";
 	})
 	console.log("tes2");
