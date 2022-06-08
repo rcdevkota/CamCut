@@ -5,7 +5,7 @@ var today = new Date();
 var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
 var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
 var dateTime = date + '_' + time;
-var dateTimeName = "webcam_" + dateTime.toString();
+var dateTimeName = dateTime.toString() +"webcam.webm";
 console.log(dateTimeName);
 
 
@@ -39,7 +39,7 @@ checkboxRec.addEventListener("click", () => {
 				mediaStreamObj.getTracks()
 					.forEach(track => track.stop())
 				openExp();
-				console.log("after open");
+				
 			};
 		}).catch(function(err) {
 			console.log(err.name, err.message);
@@ -66,7 +66,7 @@ function uploadVideo() {
 		body: formData
 	});
 	
-	alert('uploded successfully');
+	alert('webcam recording successfully uploded to the Cloud');
 	
 
 }

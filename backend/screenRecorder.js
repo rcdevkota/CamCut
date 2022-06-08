@@ -1,41 +1,41 @@
-var mediaRecorder;
+var mdeiaRecorderScreen;
 
 //for naming the video
-var today = new Date();
-var date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-console.log(date);
-console.log(time);
 
-const dateTime = date + ',' + time;
-var dateTimeNameScreen = dateTime.toString() + "Screen.mp4";
+var dateTime = date + ',' + time;
+var dateTimeName =  dateTime.toString()+"Screen.webm" ;
 
-console.log(dateTimeNameScreen);
+console.log(dateTimeName);
 
 //saves the blob streams into this array
-let chunks = [];
+let chunksScreen = [];
 
-const checkboxScr = document.getElementById("checkbox🔊 ");
+const checkboxScr = document.getElementById("checkbox");
 checkboxScr.addEventListener("click", () => {
-	if (document.getElementById("checkbox🔊").checked) {
-		console.log("webcam recording on");
+	if (document.getElementById("checkbox").checked) {
+		console.log("screen recording started");
+		var audioStatus = document.getElementById("checkbox🔊").checked;
+		console.log("audioRecording status " + audioStatus);
 		constrainObj = {
-			audio: document.getElementById("checkbox🎙").checked,
+
+			
 			video: {
-				width: { min: 640, ideal: 1280, max: 1920 },
-				height: { min: 480, ideal: 720, max: 1080 },
+				mediaSource: "screen",
+
 			},
+			audio: true,
+			
 		};
 
-		navigator.mediaDevices.getUserMedia(constrainObj).then(function(mediaStreamObj) {
+		navigator.mediaDevices.getDisplayMedia(constrainObj).then(function(mediaStreamObj) {
 			//connect the media stream to the first video element
-			mediaRecorder = new MediaRecorder(mediaStreamObj);
-			mediaRecorder.start();
-			mediaRecorder.ondataavailable = function(ev) {
-				chunks.push(ev.data);
+			mdeiaRecorderScreen = new MediaRecorder(mediaStreamObj);
+			mdeiaRecorderScreen.start();
+			mdeiaRecorderScreen.ondataavailable = function(ev) {
+				chunksScreen.push(ev.data);
 			};
-			mediaRecorder.onstop = (ev) => {
-				mediaRecorder.stop();
+			mdeiaRecorderScreen.onstop = (ev) => {
+				mdeiaRecorderScreen.stop();
 				mediaStreamObj.getTracks()
 					.forEach(track => track.stop())
 				openExp();
@@ -44,7 +44,7 @@ checkboxScr.addEventListener("click", () => {
 			console.log(err.name, err.message);
 		});
 	} else {
-		mediaRecorder.stop();
+		mdeiaRecorderScreen.stop();
 		console.log("screen recording stopped");
 
 	}
@@ -54,10 +54,10 @@ checkboxScr.addEventListener("click", () => {
 function uploadVideo() {
 
 
-	const blob = new Blob(chunks, { type: 'video/webm' });
+	const blob = new Blob(chunksScreen, { type: 'video/webm' });
 
 	//for posting the video to the server
-	let videoFile = new File([blob], dateTimeNameScreen);
+	let videoFile = new File([blob], dateTimeName);
 
 	var formData = new FormData();
 	formData.append("file", videoFile);
@@ -67,7 +67,7 @@ function uploadVideo() {
 		body: formData
 	});
 	
-	alert('uploded successfully');
+	alert('screen recording successfully uploded to the Cloud');
 	
 
 }
@@ -79,7 +79,7 @@ function downloadVideoLocal() {
 	const a = document.createElement('a');
 	a.style.display = 'none';
 	a.href = url;
-	a.download = dateTimeNameScreen;
+	a.download = dateTimeName;
 	document.body.appendChild(a);
 	a.click();
 	setTimeout(() => {
@@ -108,3 +108,4 @@ async function openExp() {
 document.getElementById("closexp").addEventListener("click", () => {
 		document.getElementById("popupHoldexp").style.display = "none";
 	})
+
