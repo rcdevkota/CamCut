@@ -364,7 +364,7 @@ document.getElementById("sepia").addEventListener("click",()=>{
 })
 
 //------------export
-
+openExp()
 function openExp(){
 		document.getElementById("popupHoldexp").style.display = "block";
 }

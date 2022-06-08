@@ -146,15 +146,7 @@ input:checked + label {
   margin-left: 10px;
   font-size: 33px;
   float: right;
-  user-select: None;
-  text-align: center;
-  border-radius: 40px;
-  width: 50px;
-  height: 50px;
   text-decoration:none;  
-  background-color: var(--onTop-color);
-  box-shadow: 5px 5px 5px var(--shade-color),
-              -2px -2px 4px var(--backbounce-color);
 }
 
 
@@ -186,35 +178,15 @@ input:checked + label {
 
 
 #uplode{
-  margin: 3px;
   margin-left: 10px;
-  font-size: 33px;
-  float: right;
+  float: left;
   user-select: None;
-  text-align: center;
-  border-radius: 40px;
-  width: 50px;
-  height: 50px;
-  text-decoration:none;  
-  background-color: var(--onTop-color);
-  box-shadow: 5px 5px 5px var(--shade-color),
-              -2px -2px 4px var(--backbounce-color);
 }
 
 #donwlode{
-  margin: 3px;
   margin-left: 10px;
-  font-size: 33px;
-  float: right;
+  float: left;
   user-select: None;
-  text-align: center;
-  border-radius: 40px;
-  width: 50px;
-  height: 50px;
-  text-decoration:none;  
-  background-color: var(--onTop-color);
-  box-shadow: 5px 5px 5px var(--shade-color),
-              -2px -2px 4px var(--backbounce-color);
 }
 
 .popup{
@@ -223,3 +195,4 @@ input:checked + label {
   cursor: pointer;
   user-select: none;
 }
+

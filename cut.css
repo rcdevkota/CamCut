@@ -110,21 +110,15 @@
   }
 
 #add{
-	user-select: None;
 	width: 30px;
 	height: 30px;
 	font-size: 20px;
-	border-radius: 40px;
-	background-color: var(--onTop-color);
-	box-shadow: 5px 5px 5px var(--shade-color), -2px -2px 4px var(--backbounce-color);
 	margin: 2px;
 }
 
 #efect{
-	user-select: None;
 	width: 95px;
 	font-size: 20px;
-	border-radius: 40px;
 	padding: 2px;
 	margin: 2px;
 	height: 30px;
@@ -155,15 +149,7 @@
 
 
 #closexp{
-	user-select: None;
-	width: 50px;
-	height: 50px;
-	font-size: 20px;
-	border-radius: 40px;
-	background-color: var(--onTop-color);
-	box-shadow: 5px 5px 5px var(--shade-color), -2px -2px 4px var(--backbounce-color);
 	float: right;
-	font-size: 33px;
 }
 
 #exp{
