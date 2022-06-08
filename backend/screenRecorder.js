@@ -8,16 +8,16 @@ console.log(date);
 console.log(time);
 
 const dateTime = date + ',' + time;
-var dateTimeName = dateTime.toString() + "Screen.mp4";
+var dateTimeNameScreen = dateTime.toString() + "Screen.mp4";
 
-console.log(dateTimeName);
+console.log(dateTimeNameScreen);
 
 //saves the blob streams into this array
 let chunks = [];
 
-const checkboxScr = document.getElementById("checkbox🔴");
+const checkboxScr = document.getElementById("checkbox🔊 ");
 checkboxScr.addEventListener("click", () => {
-	if (document.getElementById("checkbox🔴").checked) {
+	if (document.getElementById("checkbox🔊").checked) {
 		console.log("webcam recording on");
 		constrainObj = {
 			audio: document.getElementById("checkbox🎙").checked,
@@ -38,7 +38,7 @@ checkboxScr.addEventListener("click", () => {
 				mediaRecorder.stop();
 				mediaStreamObj.getTracks()
 					.forEach(track => track.stop())
-				uploadVideo();
+				openExp();
 			};
 		}).catch(function(err) {
 			console.log(err.name, err.message);
@@ -52,32 +52,59 @@ checkboxScr.addEventListener("click", () => {
 
 
 function uploadVideo() {
+
+
+	const blob = new Blob(chunks, { type: 'video/webm' });
+
+	//for posting the video to the server
+	let videoFile = new File([blob], dateTimeNameScreen);
+
+	var formData = new FormData();
+	formData.append("file", videoFile);
+
+	fetch('upload', {
+		method: "POST",
+		body: formData
+	});
+	
+	alert('uploded successfully');
+	
+
+}
+
+function downloadVideoLocal() {
 	//for downloading the video to the local repository
 	const blob = new Blob(chunks, { type: 'video/webm' });
 	const url = window.URL.createObjectURL(blob);
 	const a = document.createElement('a');
 	a.style.display = 'none';
 	a.href = url;
-	a.download = dateTimeName;
+	a.download = dateTimeNameScreen;
 	document.body.appendChild(a);
 	a.click();
 	setTimeout(() => {
 		document.body.removeChild(a);
 		window.URL.revokeObjectURL(url);
 	}, 100);
+
 	
-	
-	
-	//for posting the video to the server
-	let videoFile = new File([blob],dateTimeName);
-	
-	var formData = new FormData();
-	formData.append("file", videoFile);
-	
-	fetch('upload', {
-		method: "POST",
-		body: formData
-	});
-	console.log("endf");
-	alert('uploded successfully');
 }
+
+async function openExp() {
+	console.log("test");
+	document.getElementById("popupHoldexp").style.display = "block";
+	document.getElementById("uplode").addEventListener("click", () => {
+		uploadVideo();
+		document.getElementById("popupHoldexp").style.display = "none";
+	})
+	document.getElementById("donwlode").addEventListener("click", () => {
+		downloadVideoLocal();
+		document.getElementById("popupHoldexp").style.display = "none";
+	})
+	console.log("tes2");
+	}
+
+
+document.getElementById("closexp").addEventListener("click", () => {
+		document.getElementById("popupHoldexp").style.display = "none";
+	})

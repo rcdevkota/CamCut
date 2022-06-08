@@ -1,60 +1,58 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8" />
-		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>CamCut</title>
-		<link rel="stylesheet" type="text/css" href="style.css" media="screen" />
-		<script type="text/javascript" src="/backend/recorder.js" defer></script>
-		<script type="text/javascript" src="/backend/main.js" defer></script>
-		<script type="text/javascript" src="/backend/liveView.js" defer></script>
-	</head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CamCut</title>
+    <link rel="stylesheet" type="text/css" href="style.css" media="screen" />
+    <script type="text/javascript" src="/backend/recorder.js" defer></script>
+    <script
+      type="text/javascript"
+      src="/backend/screenRecorder.js"
+      defer
+    ></script>
+    <script type="text/javascript" src="/backend/main.js" defer></script>
+    <script type="text/javascript" src="/backend/liveView.js" defer></script>
+  </head>
 
-	<body>
-		<header>
-			<div class="headerContent">
-				<img id="logo" style="float: left;" src="resources/logo.svg">
-				<a class="button" id="camCutSwop" href="cut.html">✂️</a>
-				<input type="checkbox" class="checkbox" id="checkboxDark">
-				<label for="checkboxDark" class="button" id="darkbutton">
-					◉
-				</label>
-			</div>
-		</header>
-		<div id="main">
-			<div class="mainContent" id="container">
-				<div class="monitor">
-					<video class="video" autoplay="false" id="videoElemWebCam">
-					</video>
-					<video class="video" autoplay="false" id="videoElementScreen">
-					</video>	
-				</div>
-				<div class="footer">
-					<div class="footerContent">
-						<input type="checkbox" class="checkbox" id="checkbox🎙" >
-							<label for="checkbox🎙" class="button">
-								🎙️
-							</label>
-						<input type="checkbox" class="checkbox" id="checkbox📸">
-							<label for="checkbox📸" class="button">
-								📸
-							</label>
-						<input type="checkbox" class="checkbox" id="checkbox🖥" >
-							<label for="checkbox🖥" class="button">
-								🖥️
-							</label>
-						<input type="checkbox" class="checkbox" id="checkbox🔊">
-							<label for="checkbox🔊" class="button">
-								🔊
-							</label>
-						<input type="checkbox" class="checkbox" id="checkbox🔴">
-							<label for="checkbox🔴" class="button">
-								🔴
-							</label>
-					</div>
-				</div>
-			</div>
-		</div>
-	</body>
+  <body>
+    <div id="popupHoldexp">
+      <div id="exp">
+        <div class="button" id="closexp">❌</div>
+        <div class="button" id="uplode">☁️</div>
+        <div class="button" id="donwlode">🔽</div>
+      </div>
+    </div>
+    <header>
+      <div class="headerContent">
+        <img id="logo" style="float: left" src="resources/logo.svg" />
+        <a class="button" id="camCutSwop" href="cut.html">✂️</a>
+        <input type="checkbox" class="checkbox" id="checkboxDark" />
+        <label for="checkboxDark" class="button" id="darkbutton"> ◉ </label>
+      </div>
+    </header>
+    <div id="main">
+      <div class="mainContent" id="container">
+        <div class="monitor">
+          <video class="video" autoplay="false" id="videoElemWebCam"></video>
+          <video class="video" autoplay="false" id="videoElementScreen"></video>
+        </div>
+        <div class="footer">
+          <div class="footerContent">
+            <input type="checkbox" class="checkbox" id="checkbox🎙" />
+            <label for="checkbox🎙" class="button"> 🎙️ </label>
+            <input type="checkbox" class="checkbox" id="checkbox📸" />
+            <label for="checkbox📸" class="button"> 📸 </label>
+            <input type="checkbox" class="checkbox" id="checkbox🖥" />
+            <label for="checkbox🖥" class="button"> 🖥️ </label>
+            <input type="checkbox" class="checkbox" id="checkbox🔊" />
+            <label for="checkbox🔊" class="button"> 🔊 </label>
+            <input type="checkbox" class="checkbox" id="checkbox🔴" />
+            <label for="checkbox🔴" class="button"> 🔴 </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
